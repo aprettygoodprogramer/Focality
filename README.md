@@ -1,0 +1,1 @@
+A focus program. Originally got the idea from Microsoft's focus feature on Windows. I wanted to make something more advanced, where I could add tasks and track time spent on things. None of the other FOSS projects really had what I wanted, so I began to build this.
