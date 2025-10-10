@@ -10,6 +10,12 @@ use ratatui::{
 };
 use tui_textarea::TextArea;
 
+enum TimerState {
+    Idle,
+    Running { start: Instant, duration: Duration },
+    Finished,
+}
+
 fn main() -> Result<()> {
     color_eyre::install()?;
     let mut terminal = ratatui::init();
@@ -22,12 +28,6 @@ fn main() -> Result<()> {
     let app_result = run(&mut terminal, &mut textarea);
     ratatui::restore();
     app_result
-}
-
-enum TimerState {
-    Idle,
-    Running { start: Instant, duration: Duration },
-    Finished,
 }
 
 fn run(terminal: &mut DefaultTerminal, textarea: &mut TextArea) -> Result<()> {
@@ -80,7 +80,6 @@ fn handle_events(
         }
     }
 
-    // Update timer state
     if let TimerState::Running { start, duration } = timer_state {
         if start.elapsed() >= *duration {
             *timer_state = TimerState::Finished;
